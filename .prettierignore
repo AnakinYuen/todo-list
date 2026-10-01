@@ -1,0 +1,10 @@
+node_modules
+**/dist
+coverage
+pnpm-lock.yaml
+skills-lock.json
+*.md
+.scratch
+.agents
+apps/api/drizzle/meta
+*.tsbuildinfo

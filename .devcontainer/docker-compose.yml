@@ -1,0 +1,61 @@
+# Dev-only overlay for the devcontainer.
+#
+# `docker-compose.yml` (repo root) is the reviewer-facing "one command" stack and
+# targets production images. The devcontainer composes both files: this overlay
+# adds a `dev` service for hot-reload development and moves the production
+# services into an inactive "prod" profile so the devcontainer neither builds nor
+# starts them (Compose skips services whose profile is not active, unlike
+# `deploy.replicas: 0` which only stops them from running).
+#
+# The production services remain untouched in the root file, so a host
+# `docker compose up` (project: todo-list) keeps working exactly as documented.
+#
+# Distinct project name so a host `docker compose up` cannot rebuild/recreate the
+# container this devcontainer is attached to.
+name: todo-list-dev
+
+services:
+  # The root file publishes 5432 on the host for debugging. Inside a devcontainer
+  # that would grab the host's 5432 and block a host `docker compose up`, so drop
+  # the publish here: the compose network address `db:5432` is all the dev server
+  # and the tests need. `!override` replaces the inherited list (Compose >= 2.24);
+  # use `!override ['5433:5432']` instead if you want host DB access on another port.
+  db:
+    ports: !override []
+
+  # Single service for the whole monorepo: the dev container runs both the API
+  # and web dev servers, while Postgres is shared from the root compose file.
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    # docker-in-docker needs a privileged container to run its own daemon. This
+    # is the isolation trade we accept: dev gets its own Docker, separate from
+    # the host daemon.
+    privileged: true
+    environment:
+      # Inside the compose network the database host is `db`, not `localhost`.
+      DATABASE_URL: postgres://postgres:postgres@db:5432/todo-list_db
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/workspaces/todo-list:cached
+      # Persist the opencode session store inside the repo (not Docker's volume
+      # area), so chat history survives container rebuilds and stays visible to
+      # plain host tools. Deliberately a bind, not XDG_DATA_HOME, so no other
+      # tool's data directory is relocated. Gitignored and dockerignored.
+      - ./.opencode-data:/home/dev/.local/share/opencode
+    working_dir: /workspaces/todo-list
+    command: sleep infinity
+
+  # Production-only services from the root compose file. Gating them behind an
+  # inactive profile keeps `docker compose build` from compiling the production
+  # targets (and stops them from running) while the devcontainer is in use.
+  api:
+    profiles: ['prod']
+  web:
+    profiles: ['prod']
+  migrate:
+    profiles: ['prod']

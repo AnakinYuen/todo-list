@@ -1,0 +1,53 @@
+node_modules/
+dist/
+build/
+coverage/
+
+# pnpm
+.pnpm-store/
+.pnpm-debug.log*
+
+# Vite
+.vite/
+apps/web/dist/
+
+# Environment & credentials
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Databases & local data
+*.db
+*.sqlite
+*.sqlite3
+
+# Test / tooling caches
+*.tsbuildinfo
+.cache/
+.eslintcache
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE (keep devcontainer, VS Code shareable settings)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.swp
+*~
+
+# Local opencode session (not part of the project)
+.opencode-data/
+
+# Agent tooling (vendored skills + their lockfile; not part of the project)
+.agents/
+skills-lock.json
+
+# playwright-cli workspace state
+.playwright/
+.playwright-cli/

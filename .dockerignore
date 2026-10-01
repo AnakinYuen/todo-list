@@ -1,0 +1,43 @@
+# Keep the build context small and deterministic.
+node_modules
+**/node_modules
+dist
+**/dist
+build
+**/build
+coverage
+**/coverage
+
+.git
+.gitignore
+.github
+
+.env
+.env.*
+!.env.example
+
+.DS_Store
+Thumbs.db
+
+# Incremental build state must never enter the image: a stale *.tsbuildinfo
+# makes tsc skip emit (it believes the excluded dist/ already exists).
+**/*.tsbuildinfo
+.pnpm-store
+.pnpm-debug.log*
+
+.vscode
+.idea
+*.swp
+*~
+
+# Docs / non-runtime assets
+*.md
+docs
+
+# Local opencode session
+.opencode-data
+
+# Agent skills and playwright-cli workspace state (not runtime assets)
+.agents
+.playwright
+.playwright-cli

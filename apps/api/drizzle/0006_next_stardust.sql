@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX "todos_series_due_date_key" ON "todos" USING btree ("series_id","due_date") WHERE "series_id" IS NOT NULL;

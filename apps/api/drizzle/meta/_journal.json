@@ -1,0 +1,76 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1790656723386,
+      "tag": "0000_natural_cardiac",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790679681048,
+      "tag": "0001_abandoned_gamma_corps",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790682464646,
+      "tag": "0002_natural_adam_warlock",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1790732910036,
+      "tag": "0003_remove_edges_to_deleted",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790737561497,
+      "tag": "0004_vengeful_madelyne_pryor",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790742617531,
+      "tag": "0005_recurrence_modes",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790747278225,
+      "tag": "0006_next_stardust",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1790747926907,
+      "tag": "0007_futuristic_speed_demon",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1790749906645,
+      "tag": "0008_overconfident_scalphunter",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1790779226978,
+      "tag": "0009_nervous_turbo",
+      "breakpoints": true
+    }
+  ]
+}

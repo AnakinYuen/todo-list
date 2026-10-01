@@ -1,0 +1,1 @@
+ALTER TABLE "todos" ADD COLUMN "spawned_at" timestamp with time zone;

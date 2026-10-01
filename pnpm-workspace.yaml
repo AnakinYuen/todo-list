@@ -1,0 +1,13 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+# pnpm 10+ blocks dependency build scripts by default. Only the native
+# toolchain packages we actually trust are allowed to run postinstall.
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  esbuild: true
+  unrs-resolver: true
+  # Telemetry-only postinstall; denied on purpose.
+  '@scarf/scarf': false

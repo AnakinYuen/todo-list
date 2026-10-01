@@ -1,0 +1,36 @@
+{
+  "name": "TODO LIST Devcontainer",
+  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
+  "service": "dev",
+  "workspaceFolder": "/workspaces/todo-list",
+  "remoteUser": "dev",
+  "updateRemoteUserUID": true,
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "postCreateCommand": "pnpm install && pnpm --filter @todo-list/shared build",
+  "forwardPorts": [8000, 5173],
+  "portsAttributes": {
+    "8000": {
+      "label": "API (+ /api/docs Swagger)"
+    },
+    "5173": {
+      "label": "Web (Vite dev server)"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "ckolkman.vscode-postgres"
+      ]
+    }
+  }
+}

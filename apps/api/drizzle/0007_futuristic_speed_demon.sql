@@ -1,0 +1,2 @@
+DROP INDEX "todos_series_due_date_key";--> statement-breakpoint
+CREATE UNIQUE INDEX "todos_series_due_date_key" ON "todos" USING btree ("series_id","due_date") WHERE "todos"."series_id" IS NOT NULL AND "todos"."deleted_at" IS NULL;
