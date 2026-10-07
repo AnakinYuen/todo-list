@@ -15,7 +15,8 @@
     "seed": "tsx scripts/seed.ts",
     "seed:manual": "tsx scripts/seed-manual.ts",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "tsx src/db/migrate.ts"
+    "db:migrate": "tsx src/db/migrate.ts",
+    "db:clean": "tsx scripts/clean.ts"
   },
   "dependencies": {
     "@fastify/static": "^10.1.5",

@@ -123,6 +123,7 @@ pnpm --filter @todo-list/api benchmark     # non-gating wall-clock benchmark
 
 pnpm --filter @todo-list/api db:generate   # generate a Drizzle migration
 pnpm --filter @todo-list/api db:migrate    # apply migrations (dev DB)
+pnpm --filter @todo-list/api db:clean      # empty list, keep schema
 pnpm --filter @todo-list/api seed          # seed the small demo set
 pnpm --filter @todo-list/api seed:manual   # ~70 varied TODOs for manual testing (truncates)
 ```

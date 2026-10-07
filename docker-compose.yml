@@ -4,9 +4,10 @@
 #   http://localhost:8000/api/docs   Swagger / OpenAPI UI
 #   http://localhost:8080            Web UI
 #
-# The default set is api + db + web. The one-off demo seeder is gated behind the
-# "tools" profile and is only run on demand:
+# The default set is api + db + web. The one-off seeder and cleaner are gated
+# behind the "tools" profile and are only run on demand:
 #   docker compose --profile tools run --rm --build seed
+#   docker compose --profile tools run --rm --build clean
 name: todo-list
 
 services:
@@ -96,6 +97,24 @@ services:
       dockerfile: Dockerfile
       target: build-api
     command: ['pnpm', '--filter', '@todo-list/api', 'seed']
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-todo-list_db}
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  # One-off cleaner: empties the list but keeps the schema and migrations.
+  # Run with:
+  #   docker compose --profile tools run --rm --build clean
+  clean:
+    profiles: ['tools']
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build-api
+    command: ['pnpm', '--filter', '@todo-list/api', 'db:clean']
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-todo-list_db}
     depends_on:
