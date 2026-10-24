@@ -182,3 +182,33 @@ pull request:
 - [`docs/adr`](./docs/adr) — the load-bearing decisions (`0001`–`0007`).
 - [`docs/decision-log.md`](./docs/decision-log.md) — interpretations and cuts.
 - [`docs/errors.md`](./docs/errors.md) — the error catalog.
+
+## Demo Scripts
+
+```bash
+docker compose up --build -d
+```
+
+```bash
+docker compose ps
+```
+### curated 5-row fixture
+```bash
+docker compose --profile tools run --rm seed
+```
+### 70-row fixture
+```bash
+docker compose --profile tools run --rm --build seed \
+  pnpm --filter @todo-list/api seed:manual
+```
+### empty list, keep schema
+```bash
+docker compose --profile tools run --rm clean
+```
+
+
+| URL | What |
+| --- | --- |
+| http://localhost:8080 | Web UI |
+| http://localhost:8000/api/docs | Swagger / OpenAPI |
+| http://localhost:8000/api/readyz | Readiness probe |
